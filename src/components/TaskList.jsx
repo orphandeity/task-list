@@ -10,11 +10,16 @@ export default function TaskList({ session }) {
   const [username, setUsername] = useState(null);
   const [website, setWebsite] = useState(null);
   const [avatar_url, setAvatarUrl] = useState(null);
+  const [taskListImage, setTaskListImage] = useState(null);
 
   useEffect(() => {
     getTasks();
     getProfile();
   }, [session]);
+
+  useEffect(() => {
+    if (avatar_url) getAvatar();
+  }, [avatar_url]);
 
   const getProfile = async () => {
     try {
@@ -43,6 +48,24 @@ export default function TaskList({ session }) {
     }
   };
 
+  async function getAvatar() {
+    try {
+      setLoading(true);
+      const { data, error } = await supabase.storage
+        .from('avatars')
+        .download(avatar_url);
+      if (error) throw error;
+      if (data) {
+        const url = URL.createObjectURL(data);
+        setTaskListImage(url);
+      }
+    } catch (error) {
+      console.log('error downloading image: ', error.message);
+    } finally {
+      setLoading(false);
+    }
+  }
+
   async function getTasks() {
     try {
       setLoading(true);
@@ -70,11 +93,21 @@ export default function TaskList({ session }) {
   }
 
   const tabStyles =
-    'px-4 py-2 text-white text-sm font-medium ui-selected:bg-blue-300 ui-not-selected:bg-gray-300 rounded-full';
+    'px-4 py-2 text-gray-700 flex-1 text-sm font-medium ui-selected:bg-gray-200 ui-not-selected:bg-gray-50 rounded-lg';
 
   return (
     <div className='mx-auto flex max-w-lg flex-col gap-8 rounded-lg border p-8'>
-      <h2 className='text-5xl font-bold'>{username}'s Todo List</h2>
+      <div className='flex items-center gap-2'>
+        {taskListImage && (
+          <img
+            src={taskListImage}
+            alt='Avatar'
+            style={{ height: 75, width: 75 }}
+            className='rounded-full'
+          />
+        )}
+        <h2 className='text-5xl font-bold'>{username}'s Task List</h2>
+      </div>
       <form className='flex items-center gap-2' onSubmit={handleAddTask}>
         <input
           type='text'
@@ -90,9 +123,9 @@ export default function TaskList({ session }) {
         </button>
       </form>
       <Tab.Group>
-        <Tab.List className='flex items-center justify-around'>
-          <Tab className={tabStyles}>All Tasks</Tab>
-          <Tab className={tabStyles}>Incomplete</Tab>
+        <Tab.List className='flex items-center justify-between gap-2'>
+          <Tab className={tabStyles}>All</Tab>
+          <Tab className={tabStyles}>To Do</Tab>
           <Tab className={tabStyles}>Completed</Tab>
         </Tab.List>
         <Tab.Panels>
