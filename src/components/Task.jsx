@@ -1,24 +1,51 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { supabase } from '../../lib/supabaseClient';
 
-export default function Task({ task }) {
-  const [isComplete, setIsComplete] = useState(false);
+export default function Task({ task, getTasks }) {
+  const [isComplete, setIsComplete] = useState(task.is_complete);
 
-  useEffect(() => {
-    async function updateTask() {
-      const { error } = await supabase
-        .from('todos')
-        .update({ is_complete: isComplete })
-        .eq('id', task.id);
-    }
-    updateTask();
-  }, [isComplete]);
+  async function handleCompleteTask(id) {
+    setIsComplete(!isComplete);
+    const { error } = await supabase
+      .from('todos')
+      .update({ is_complete: !isComplete })
+      .eq('id', id);
+    getTasks();
+  }
+
+  async function handleDeleteTask(id) {
+    const { error } = await supabase.from('todos').delete().eq('id', id);
+    console.log('task deleted');
+    getTasks();
+  }
 
   return (
     <li className='flex items-center justify-between rounded-lg py-2 px-4 shadow'>
-      <p className={isComplete ? 'line-through' : ''}>{task.task}</p>
       <div className='flex items-center gap-2'>
-        <input type='checkbox' onChange={() => setIsComplete(!isComplete)} />
+        <svg
+          role='button'
+          xmlns='http://www.w3.org/2000/svg'
+          fill='none'
+          viewBox='0 0 24 24'
+          strokeWidth={1.5}
+          stroke='currentColor'
+          className={
+            task.is_complete
+              ? 'h-6 w-6 hover:text-red-500'
+              : 'h-6 w-6 text-green-700 hover:text-green-500'
+          }
+          onClick={() => handleCompleteTask(task.id)}
+        >
+          <path
+            strokeLinecap='round'
+            strokeLinejoin='round'
+            d='M4.5 12.75l6 6 9-13.5'
+          />
+        </svg>
+
+        <p className={task.is_complete ? 'line-through' : ''}>{task.task}</p>
+      </div>
+      <div className='flex items-center gap-2'>
         <svg
           role='button'
           xmlns='http://www.w3.org/2000/svg'
@@ -27,6 +54,7 @@ export default function Task({ task }) {
           strokeWidth={1.5}
           stroke='currentColor'
           className='h-6 w-6 hover:text-red-500'
+          onClick={() => handleDeleteTask(task.id)}
         >
           <path
             strokeLinecap='round'
