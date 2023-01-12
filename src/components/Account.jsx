@@ -72,7 +72,7 @@ const Account = ({ session }) => {
     <>
       <Dialog open={isOpen} onClose={() => setIsOpen(false)}>
         {/* The backdrop, rendered as a fixed sibling to the panel container */}
-        <div className='fixed inset-0 bg-gray-900/90' aria-hidden='true' />
+        <div className='fixed inset-0 bg-neutral-900/90' aria-hidden='true' />
 
         {/* Full-screen container to center the panel */}
         <div className='fixed inset-0 flex items-center justify-center p-4'>
@@ -109,7 +109,7 @@ const Account = ({ session }) => {
                     id='email'
                     type='text'
                     value={session.user.email}
-                    className='w-full rounded-lg border-gray-700'
+                    className='w-full rounded-lg border-neutral-700'
                     disabled
                   />
                 </div>
@@ -125,7 +125,7 @@ const Account = ({ session }) => {
                     type='text'
                     value={username || ''}
                     onChange={e => setUsername(e.target.value)}
-                    className='w-full rounded-lg border-gray-700'
+                    className='w-full rounded-lg border-neutral-700'
                   />
                 </div>
 
@@ -140,7 +140,7 @@ const Account = ({ session }) => {
                     type='url'
                     value={website || ''}
                     onChange={e => setWebsite(e.target.value)}
-                    className='w-full rounded-lg border-gray-700'
+                    className='w-full rounded-lg border-neutral-700'
                   />
                 </div>
 
@@ -148,7 +148,7 @@ const Account = ({ session }) => {
 
                 <div>
                   <button
-                    className='w-full rounded-lg bg-gray-50 px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-100'
+                    className='w-full rounded-lg bg-neutral-50 px-4 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100'
                     disabled={loading}
                   >
                     Update Profile
@@ -161,14 +161,14 @@ const Account = ({ session }) => {
 
             <div className='flex justify-center gap-2'>
               <button
-                className='flex-1 rounded-lg bg-gray-50 px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-100'
+                className='flex-1 rounded-lg bg-neutral-50 px-4 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100'
                 type='button'
                 onClick={() => supabase.auth.signOut()}
               >
                 Sign Out
               </button>
               <button
-                className='flex-1 rounded-lg bg-gray-50 px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-100'
+                className='flex-1 rounded-lg bg-neutral-50 px-4 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100'
                 onClick={() => setIsOpen(false)}
               >
                 Close
@@ -184,7 +184,7 @@ const Account = ({ session }) => {
         viewBox='0 0 24 24'
         strokeWidth={1.5}
         stroke='currentColor'
-        className='m-2 h-6 w-6 hover:text-gray-500'
+        className='m-2 h-6 w-6 hover:text-neutral-500'
         onClick={() => setIsOpen(true)}
       >
         <path

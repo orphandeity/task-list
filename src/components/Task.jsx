@@ -31,8 +31,8 @@ export default function Task({ task, getTasks }) {
           stroke='currentColor'
           className={
             task.is_complete
-              ? 'h-6 w-6 hover:text-red-500'
-              : 'h-6 w-6 text-green-700 hover:text-green-500'
+              ? 'h-6 w-6 text-green-700 hover:text-green-500'
+              : 'h-6 w-6 text-neutral-300 hover:text-green-500'
           }
           onClick={() => handleCompleteTask(task.id)}
         >

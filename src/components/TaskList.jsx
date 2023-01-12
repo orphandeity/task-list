@@ -96,7 +96,7 @@ export default function TaskList({ session }) {
     'px-4 py-2 text-gray-700 flex-1 text-sm font-medium ui-selected:bg-gray-200 ui-not-selected:bg-gray-50 rounded-lg';
 
   return (
-    <div className='mx-auto flex max-w-lg flex-col gap-8 rounded-lg border p-8'>
+    <div className='mx-auto flex max-w-lg flex-col gap-8 rounded-lg bg-white p-8 shadow-lg'>
       <div className='flex items-center gap-2'>
         {taskListImage && (
           <img
@@ -106,7 +106,7 @@ export default function TaskList({ session }) {
             className='rounded-full'
           />
         )}
-        <h2 className='text-5xl font-bold'>{username}'s Task List</h2>
+        <h2 className='text-3xl font-bold'>{username}'s Task List</h2>
       </div>
       <form className='flex items-center gap-2' onSubmit={handleAddTask}>
         <input
@@ -115,12 +115,30 @@ export default function TaskList({ session }) {
           onChange={e => setNewTask(e.target.value)}
           className='flex-1 rounded-lg border-2 border-gray-100'
         />
-        <button
+        <button type='submit'>
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            fill='none'
+            viewBox='0 0 24 24'
+            strokeWidth={1.5}
+            stroke='currentColor'
+            className='h-6 w-6 hover:text-green-500'
+            onClick={handleAddTask}
+          >
+            <path
+              strokeLinecap='round'
+              strokeLinejoin='round'
+              d='M12 4.5v15m7.5-7.5h-15'
+            />
+          </svg>
+        </button>
+
+        {/* <button
           type='submit'
           className='rounded-lg bg-gray-50 px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-100'
         >
           add
-        </button>
+        </button> */}
       </form>
       <Tab.Group>
         <Tab.List className='flex items-center justify-between gap-2'>
