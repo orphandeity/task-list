@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../../lib/supabaseClient';
 import { Dialog } from '@headlessui/react';
+import Avatar from './Avatar';
 
 const Account = ({ session }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -72,11 +73,13 @@ const Account = ({ session }) => {
       <Dialog open={isOpen} onClose={() => setIsOpen(false)}>
         {/* The backdrop, rendered as a fixed sibling to the panel container */}
         <div className='fixed inset-0 bg-gray-900/90' aria-hidden='true' />
+
         {/* Full-screen container to center the panel */}
         <div className='fixed inset-0 flex items-center justify-center p-4'>
+          {/* user profile modal */}
           <Dialog.Panel
             aria-live='polite'
-            className='flex flex-col gap-4 rounded-lg border bg-white p-8'
+            className='flex flex-col gap-8 rounded-lg border bg-white px-16 py-8'
           >
             <Dialog.Title className='text-xl font-bold'>
               User Profile
@@ -84,7 +87,20 @@ const Account = ({ session }) => {
             {loading ? (
               'Saving ...'
             ) : (
-              <form onSubmit={updateProfile} className='flex flex-col gap-2'>
+              <form onSubmit={updateProfile} className='flex flex-col gap-4'>
+                {/* upload image */}
+
+                <Avatar
+                  url={avatar_url}
+                  size={150}
+                  onUpload={url => {
+                    setAvatarUrl(url);
+                    updateProfile({ username, website, avatar_url: url });
+                  }}
+                />
+
+                {/* email */}
+
                 <div>
                   <label htmlFor='email' className='text-sm font-semibold'>
                     Email
@@ -97,6 +113,9 @@ const Account = ({ session }) => {
                     disabled
                   />
                 </div>
+
+                {/* name */}
+
                 <div>
                   <label htmlFor='username' className='text-sm font-semibold'>
                     Name
@@ -109,6 +128,9 @@ const Account = ({ session }) => {
                     className='w-full rounded-lg border-gray-700'
                   />
                 </div>
+
+                {/* website */}
+
                 <div>
                   <label htmlFor='website' className='text-sm font-semibold'>
                     Website
@@ -121,6 +143,9 @@ const Account = ({ session }) => {
                     className='w-full rounded-lg border-gray-700'
                   />
                 </div>
+
+                {/* update button */}
+
                 <div>
                   <button
                     className='w-full rounded-lg bg-gray-50 px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-100'
@@ -131,6 +156,9 @@ const Account = ({ session }) => {
                 </div>
               </form>
             )}
+
+            {/* action buttons */}
+
             <div className='flex justify-center gap-2'>
               <button
                 className='flex-1 rounded-lg bg-gray-50 px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-100'
