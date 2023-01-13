@@ -65,7 +65,7 @@ export default function Avatar({ url, size, onUpload }) {
         'Uploading...'
       ) : (
         <>
-          <label htmlFor='single' className='text-sm font-semibold'>
+          <label htmlFor='single' className='text-sm font-medium'>
             Upload an avatar
           </label>
           <div>
@@ -75,7 +75,7 @@ export default function Avatar({ url, size, onUpload }) {
               accept='image/*'
               onChange={uploadAvatar}
               disabled={uploading}
-              className='text-xs font-light text-gray-700 file:rounded-lg file:border-0 file:bg-gray-50 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-gray-700 hover:file:bg-gray-100'
+              className='rounded-lg px-3 py-2 text-xs text-neutral-500 file:rounded-full file:border-0 file:bg-neutral-50 file:p-3 file:py-2 file:font-medium hover:file:bg-neutral-100'
             />
           </div>
         </>

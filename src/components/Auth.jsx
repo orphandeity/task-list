@@ -24,16 +24,16 @@ export default function Auth() {
     <div className='flex h-screen items-center justify-center'>
       <div
         aria-live='polite'
-        className='flex max-w-sm flex-col gap-8 rounded-lg border px-8 py-4'
+        className='flex max-w-sm flex-col gap-8 rounded-lg border bg-white px-8 py-4 shadow-lg'
       >
-        <h1 className='text-xl font-bold'>Supabase + React</h1>
+        <h1 className='text-3xl font-bold'>Task List</h1>
         <p>Sign in via magic link with your email below</p>
         {loading ? (
           'Sending magic link...'
         ) : (
           <form onSubmit={handleLogin} className='flex flex-col gap-4'>
-            <div className='flex items-center gap-2'>
-              <label htmlFor='email' className='font-semibold'>
+            <div>
+              <label htmlFor='email' className='text-sm font-medium'>
                 Email
               </label>
               <input
@@ -42,12 +42,12 @@ export default function Auth() {
                 placeholder='Your email'
                 value={email}
                 onChange={e => setEmail(e.target.value)}
-                className='w-full rounded-full border-2 border-neutral-50 px-4 py-2 text-sm'
+                className='block w-full rounded-lg border-neutral-300 shadow-sm'
               />
             </div>
             <button
               aria-live='polite'
-              className='w-full rounded-full bg-neutral-50 px-4 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100'
+              className='w-full rounded-lg border border-neutral-300 px-3 py-2 text-sm font-medium shadow-sm hover:bg-neutral-50'
             >
               Send magic link
             </button>

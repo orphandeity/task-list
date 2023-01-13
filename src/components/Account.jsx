@@ -81,7 +81,7 @@ const Account = ({ session }) => {
             aria-live='polite'
             className='flex flex-col gap-8 rounded-lg border bg-white px-16 py-8'
           >
-            <Dialog.Title className='text-xl font-bold'>
+            <Dialog.Title className='text-3xl font-bold'>
               User Profile
             </Dialog.Title>
             {loading ? (
@@ -102,14 +102,14 @@ const Account = ({ session }) => {
                 {/* email */}
 
                 <div>
-                  <label htmlFor='email' className='text-sm font-semibold'>
+                  <label htmlFor='email' className='text-sm font-medium'>
                     Email
                   </label>
                   <input
                     id='email'
                     type='text'
                     value={session.user.email}
-                    className='w-full rounded-lg border-neutral-700'
+                    className='w-full rounded-lg border-neutral-300 shadow-sm'
                     disabled
                   />
                 </div>
@@ -117,7 +117,7 @@ const Account = ({ session }) => {
                 {/* name */}
 
                 <div>
-                  <label htmlFor='username' className='text-sm font-semibold'>
+                  <label htmlFor='username' className='text-sm font-medium'>
                     Name
                   </label>
                   <input
@@ -125,14 +125,14 @@ const Account = ({ session }) => {
                     type='text'
                     value={username || ''}
                     onChange={e => setUsername(e.target.value)}
-                    className='w-full rounded-lg border-neutral-700'
+                    className='w-full rounded-lg border-neutral-300 shadow-sm'
                   />
                 </div>
 
                 {/* website */}
 
                 <div>
-                  <label htmlFor='website' className='text-sm font-semibold'>
+                  <label htmlFor='website' className='text-sm font-medium'>
                     Website
                   </label>
                   <input
@@ -140,7 +140,7 @@ const Account = ({ session }) => {
                     type='url'
                     value={website || ''}
                     onChange={e => setWebsite(e.target.value)}
-                    className='w-full rounded-lg border-neutral-700'
+                    className='w-full rounded-lg border-neutral-300 shadow-sm'
                   />
                 </div>
 
@@ -148,7 +148,7 @@ const Account = ({ session }) => {
 
                 <div>
                   <button
-                    className='w-full rounded-lg bg-neutral-50 px-4 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100'
+                    className='w-full rounded-lg border border-neutral-300 px-3 py-2 text-sm font-medium shadow-sm hover:bg-neutral-50'
                     disabled={loading}
                   >
                     Update Profile
@@ -161,14 +161,14 @@ const Account = ({ session }) => {
 
             <div className='flex justify-center gap-2'>
               <button
-                className='flex-1 rounded-lg bg-neutral-50 px-4 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100'
+                className='flex-1 rounded-lg border border-red-300 px-3 py-2 text-sm font-medium text-red-500 shadow-sm hover:border-red-500 hover:bg-red-50 hover:text-red-500 hover:shadow-red-700/5'
                 type='button'
                 onClick={() => supabase.auth.signOut()}
               >
                 Sign Out
               </button>
               <button
-                className='flex-1 rounded-lg bg-neutral-50 px-4 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100'
+                className='flex-1 rounded-lg border border-neutral-300 px-3 py-2 text-sm font-medium shadow-sm hover:bg-neutral-50'
                 onClick={() => setIsOpen(false)}
               >
                 Close

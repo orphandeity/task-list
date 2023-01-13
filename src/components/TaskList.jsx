@@ -93,7 +93,7 @@ export default function TaskList({ session }) {
   }
 
   const tabStyles =
-    'px-4 py-2 text-gray-700 flex-1 text-sm font-medium ui-selected:bg-gray-200 ui-not-selected:bg-gray-50 rounded-lg';
+    'flex-1 rounded-lg border border-neutral-300 px-3 py-2 text-sm font-medium shadow-sm ui-selected:bg-neutral-50';
 
   return (
     <div className='mx-auto flex max-w-lg flex-col gap-8 rounded-lg bg-white p-8 shadow-lg'>
@@ -113,7 +113,7 @@ export default function TaskList({ session }) {
           type='text'
           value={newTask}
           onChange={e => setNewTask(e.target.value)}
-          className='flex-1 rounded-lg border-2 border-gray-100'
+          className='w-full flex-1 rounded-lg border-neutral-300 shadow-sm'
         />
         <button type='submit'>
           <svg
@@ -122,7 +122,7 @@ export default function TaskList({ session }) {
             viewBox='0 0 24 24'
             strokeWidth={1.5}
             stroke='currentColor'
-            className='h-6 w-6 hover:text-green-500'
+            className='h-8 w-8 text-neutral-300 hover:text-green-500'
             onClick={handleAddTask}
           >
             <path
@@ -132,15 +132,8 @@ export default function TaskList({ session }) {
             />
           </svg>
         </button>
-
-        {/* <button
-          type='submit'
-          className='rounded-lg bg-gray-50 px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-100'
-        >
-          add
-        </button> */}
       </form>
-      <Tab.Group>
+      <Tab.Group defaultIndex={1}>
         <Tab.List className='flex items-center justify-between gap-2'>
           <Tab className={tabStyles}>All</Tab>
           <Tab className={tabStyles}>To Do</Tab>
