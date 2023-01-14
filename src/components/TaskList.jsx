@@ -106,7 +106,9 @@ export default function TaskList({ session }) {
             className='rounded-full'
           />
         )}
-        <h2 className='text-3xl font-bold'>{username}'s Task List</h2>
+        <h2 className='text-3xl font-bold'>
+          {username && <span>{username}'s </span>}Task List
+        </h2>
       </div>
       <form className='flex items-center gap-2' onSubmit={handleAddTask}>
         <input
